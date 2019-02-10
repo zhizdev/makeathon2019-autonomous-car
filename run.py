@@ -1,4 +1,3 @@
-
 from picamera import PiCamera
 from time import sleep
 import time
@@ -6,7 +5,7 @@ import io
 from PIL import Image
 import keyboard
 from gpiozero import Robot
-
+import tensorflow as tf
 
 """ DON'T FKING CHANGE THIS!!! """
 leftPinF = 26
@@ -29,35 +28,40 @@ time.sleep(1)
 
 #outputs = [io.BytesIO() for i in range(60)]
 #camera.capture_sequence(outputs,'jpeg',use_video_port=True)
+sess = tf.Session()
+saver = tf.train.import_meta_graph('model_2.meta')
+saver.restore(sess,tf.train.latest_checkpoint('./'))
+
+graph = tf.get_default_graph()
+
 
 count = 0
 sleeptimer = 0.3
 
 camera.start_preview()
 def take_noods(s):
-    camera.capture('train/0.jpg')
+    camera.capture('train/' + str(count) + s + '.jpg')
 
 while True:
-		inp = input('enter:')
         #dir = sys.stdin.read (1)
-		if inp == "w":
+		if keyboard.is_pressed ("w"):
 			take_noods('w')
 			robot.forward (maxSpeed)
-			time.sleep(4)
+			time.sleep(sleeptimer)
 			robot.stop()
-		elif inp == "a":
+		elif keyboard.is_pressed ("a"):
 			take_noods('a')
 			#robot.right(.2)
 			#robot.forward (maxSpeed, curve_left = turnSpeed + .2)
 			robot.forward (maxSpeed, curve_right = turnSpeed + .4)
 			time.sleep(sleeptimer)
 			robot.stop()
-		elif inp ==  "s":
+		elif keyboard.is_pressed ("s"):
 			take_noods('s')
 			robot.backward (maxSpeed)
 			time.sleep(sleeptimer)
 			robot.stop()
-		elif inp =="d":
+		elif keyboard.is_pressed ("d"):
 			take_noods('d')
 			#robot.left(.2)
 			robot.forward (maxSpeed, curve_left = turnSpeed + .4)	
@@ -65,10 +69,10 @@ while True:
 			robot.stop()
 			#robot.forward (maxSpeed, curve_right = turnSpeed + .2)
             
-		elif inp == "o":
+		elif keyboard.is_pressed ("o"):
 			break
             
-		elif inp == "x":
+		elif keyboard.is_pressed ("x"):
 			take_noods('x')
 			robot.stop()
 			
@@ -80,3 +84,4 @@ while True:
 camera.stop_preview()
 
 print('training saved')
+
