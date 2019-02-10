@@ -2,10 +2,10 @@ from gpiozero import Robot
 import keyboard
 
 """ DON'T FKING CHANGE THIS!!! """
-leftPinF = 19
-leftPinB = 26
-rightPinF = 6
-rightPinB = 23
+leftPinF = 26
+leftPinB = 19
+rightPinF = 13
+rightPinB = 6
 """ DON'T FKING CHANGE THIS!!! """
 
 maxSpeed = 0.5 

@@ -13,7 +13,7 @@ rightPinF = 13
 rightPinB = 6
 """ DON'T FKING CHANGE THIS!!! """
 
-maxSpeed = 0.5 
+maxSpeed = 0.4 
 turnSpeed = 0.2 
 
 robot = Robot (left = (leftPinF, leftPinB), right = (rightPinF, rightPinB))
@@ -29,7 +29,7 @@ time.sleep(1)
 #camera.capture_sequence(outputs,'jpeg',use_video_port=True)
 
 count = 0
-
+sleeptimer = 0.3
 
 camera.start_preview()
 def take_noods(s):
@@ -40,18 +40,27 @@ while True:
 		if keyboard.is_pressed ("w"):
 			take_noods('w')
 			robot.forward (maxSpeed)
-            
+			time.sleep(sleeptimer)
+			robot.stop()
 		elif keyboard.is_pressed ("a"):
 			take_noods('a')
-			robot.forward (maxSpeed, curve_left = turnSpeed + .2)
-            
+			#robot.right(.2)
+			#robot.forward (maxSpeed, curve_left = turnSpeed + .2)
+			robot.forward (maxSpeed, curve_right = turnSpeed + .4)
+			time.sleep(sleeptimer)
+			robot.stop()
 		elif keyboard.is_pressed ("s"):
 			take_noods('s')
 			robot.backward (maxSpeed)
-            
+			time.sleep(sleeptimer)
+			robot.stop()
 		elif keyboard.is_pressed ("d"):
 			take_noods('d')
-			robot.forward (maxSpeed, curve_right = turnSpeed)
+			#robot.left(.2)
+			robot.forward (maxSpeed, curve_left = turnSpeed + .4)	
+			time.sleep(sleeptimer)
+			robot.stop()
+			#robot.forward (maxSpeed, curve_right = turnSpeed + .2)
             
 		elif keyboard.is_pressed ("o"):
 			break
