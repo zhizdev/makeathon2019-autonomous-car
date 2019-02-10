@@ -5,7 +5,7 @@ import io
 from PIL import Image
 
 camera = PiCamera()
-camera.resolution = (640,360)
+camera.resolution = (64,64)
 camera.framerate = 15
 time.sleep(1)
 
