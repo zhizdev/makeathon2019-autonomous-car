@@ -1,6 +1,8 @@
 # makeathon2019-autonomous-car
 Raspberry Pi 3 Powered Autonomous Car with Vision.
 
+[Devpost](https://devpost.com/software/makeathon2019-autonomous-car)
+
 ## Inspiration
 Inspired by recent progress in autonomous cars, we set out to create our own small scale version of an autonomous car with a Raspberry Pi 3. We connected a camera to the Pi and deployed a trained machine learning model to direct the car's motion: forward, turn left, turn right, and stop. 
 
